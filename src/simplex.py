@@ -30,7 +30,7 @@ def min_ratio_test(ratio_list):
     pivot_row = 0
     min_ratio = np.inf
     for i in range(len(ratio_list)):
-        if 0 < ratio_list[i] < min_ratio:
+        if 0 <= ratio_list[i] < min_ratio:
             pivot_row = i + 1
             min_ratio = ratio_list[i]
     if min_ratio is np.inf:
@@ -77,7 +77,6 @@ def simplex_solver(M_mat, display=0):
     print(f'pivot columns are: {pivots_column_list}')
     print(f'initial tableau is:')
     print(f'=======================')
-    #print(f'{M_mat}')  # print initial tableau
     print(pd.DataFrame(M_mat)) # print initial tableau
 
     pivot_n = new_pivot(M_mat)  # returns new pivot if not pass optimal test, otherwise return zero
