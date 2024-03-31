@@ -2,6 +2,7 @@
 
 # import package
 import numpy as np
+import pandas as pd
 import warnings
 
 float_formatter = "{:.2f}".format
@@ -55,7 +56,7 @@ def new_pivot(M_mat):  # M is the tableau
     ratio_list = np.divide(M_mat[range(1, row_n + 1), -1], M_mat[range(1, row_n + 1), pivot_col])
 
     pivot_row = min_ratio_test(ratio_list)
-    if pivot_row is 0:
+    if pivot_row == 0:
         print(f'no leaving variable, which means z is unbounded. Here is the ratio list:')
         print(f'{ratio_list}')
         return 0
@@ -76,17 +77,18 @@ def simplex_solver(M_mat, display=0):
     print(f'pivot columns are: {pivots_column_list}')
     print(f'initial tableau is:')
     print(f'=======================')
-    print(f'{M_mat}')  # print initial tableau
+    #print(f'{M_mat}')  # print initial tableau
+    print(pd.DataFrame(M_mat)) # print initial tableau
 
     pivot_n = new_pivot(M_mat)  # returns new pivot if not pass optimal test, otherwise return zero
-    while pivot_n is not 0:
+    while pivot_n != 0:
         pivots_column_list[pivot_n[0]-1] = pivot_n[1]
         print(f'pivot columns are: {pivots_column_list}')
         pivoting(M_mat, pivot_n[0], pivot_n[1])
-        if display is not 0:
+        if display != 0:
             print(f'new pivot is {pivot_n}')
             print(f'=======================')
-            print(M_mat)
+            print(pd.DataFrame(M_mat))  # print updated tableau
 
         pivot_n = new_pivot(M_mat)
 
