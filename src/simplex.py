@@ -39,6 +39,7 @@ def min_ratio_test(ratio_list):
         return 0  # no leaving variable, this means optimum is unbounded
     elif min_ratio == 0:
         print(f'it is nondegenerte case. Do manually for the next pivot row.')
+        print(f'{ratio_list}')
         return -1
     else:
         return pivot_row
